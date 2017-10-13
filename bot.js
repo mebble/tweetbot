@@ -5,7 +5,17 @@ const config = require('./config');
 
 let T = new Twit(config);
 
-/* STREAM request - User stream */
+/* STREAM request (user stream) - tweet */
+let stream = T.stream('user');
+stream.on('tweet', tweetEvent);
+
+function tweetEvent(event) {
+	const fs = require('fs');
+	let jsonStr = JSON.stringify(event, null, 4);
+	fs.writeFile('tweet.json', jsonStr);
+}
+
+/* STREAM request (user stream) - follow */
 // let stream = T.stream('user');
 // stream.on('follow', followed);
 
