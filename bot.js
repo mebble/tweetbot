@@ -12,7 +12,7 @@ stream.on('tweet', tweetEvent);
 function tweetEvent(event) {
 	const fs = require('fs');
 	let jsonStr = JSON.stringify(event, null, 4);
-	fs.writeFile('tweet.json', jsonStr);
+	fs.writeFile('tweets/tweet.json', jsonStr);
 }
 
 /* STREAM request (user stream) - follow */
