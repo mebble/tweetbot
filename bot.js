@@ -10,18 +10,22 @@ let stream = T.stream('user');
 stream.on('tweet', tweetEvent);
 
 function tweetEvent(event) {
-	let replyTo = event.in_reply_to_screen_name;
 	let from = event.user.screen_name;
-	let text = event.text;
+	let mentions = event.entities.user_mentions;
+	let thisBot = 'nottiebottie';
 
-	console.log(`From @${from} to @${replyTo}`);
+	mentions.forEach(function(mention) {
+		let mention_screen_name = mention.screen_name;
 
-	if (replyTo === 'nottiebottie') {
-		let newTweet = `@${from} Thank you for acknowledging my existence!`;
-		tweetIt({
-			status: newTweet
-		});
-	}
+		console.log(`From @${from} to @${mention_screen_name}`);
+		if (mention_screen_name === thisBot) {
+			let date = new Date();
+			let time = `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
+			let replyTxt = `Hey @${from} ! I just got your tweet at ${time} today`;
+
+			tweetIt({ status: replyTxt });
+		}
+	});
 }
 
 function tweetIt(tweet) {
