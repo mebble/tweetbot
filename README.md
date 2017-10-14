@@ -22,7 +22,7 @@ Your bot needs a Twitter account. After setting one up, log into it and go to th
 **Do not make your Consumer Secret and Access Token secret accessible to anyone**
 
 Create a file `config.js` in your project's home directory and put the following code in it.
-```
+```javascript
 module.exports = {
 	consumer_key:         '...',
 	consumer_secret:      '...',
